@@ -364,6 +364,8 @@ Error message and password prompt
 
 <li>R-plot</li>
 
+<li>R-regression</li>
+
 <li>R-輔助性</li>
 
 <li>tiddlywiki</li>
@@ -12388,8 +12390,8 @@ display:block;
 <div created="20210303155113637" creator="dlcc" modified="20210305095112469" modifier="dlcc" title="$:/state/tab/moresidebar-1850697562">
 <pre>$:/core/ui/MoreSideBar/System</pre>
 </div>
-<div created="20210302151544850" creator="dlcc" modified="20210305102355479" modifier="dlcc" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Tools</pre>
+<div created="20210302151544850" creator="dlcc" modified="20210309072500458" modifier="dlcc" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Open</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
@@ -12397,7 +12399,7 @@ display:block;
 <div created="20210305063832710" creator="d" modified="20210305063833054" modifier="dlc" title="$:/status/UserName">
 <pre>dlcc</pre>
 </div>
-<div created="20210309063000698" creator="dlcc" list="TOC R [[R tutorials]] R-plot" modified="20210309063116170" modifier="dlcc" title="$:/StoryList">
+<div created="20210309072144945" creator="dlcc" list="TOC R [[R tutorials]] R-regression R-plot" modified="20210309074527546" modifier="dlcc" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20210303160239367" list="$:/core/ui/Buttons/home $:/core/ui/Buttons/close-all $:/core/ui/Buttons/fold-all $:/core/ui/Buttons/unfold-all $:/core/ui/Buttons/permaview $:/core/ui/Buttons/new-tiddler $:/.giffmex/buttons/newnote-datetime $:/core/ui/Buttons/new-journal $:/core/ui/Buttons/new-image $:/core/ui/Buttons/import $:/core/ui/Buttons/export-page $:/core/ui/Buttons/control-panel $:/core/ui/Buttons/advanced-search $:/core/ui/Buttons/manager $:/core/ui/Buttons/tag-manager $:/core/ui/Buttons/language $:/core/ui/Buttons/palette $:/core/ui/Buttons/theme $:/core/ui/Buttons/storyview $:/core/ui/Buttons/encryption $:/core/ui/Buttons/timestamp $:/core/ui/Buttons/full-screen $:/core/ui/Buttons/print $:/core/ui/Buttons/save-wiki $:/core/ui/Buttons/refresh $:/core/ui/Buttons/more-page-actions" modified="20210303160311897" tags="tb" title="$:/tags/PageControls">
@@ -12621,15 +12623,25 @@ field=&quot;title&quot;/&gt; &lt;br&gt;&lt;/$link&gt;&lt;/$list&gt;</pre>
 * [[R-plot]]
 * [[R-regression]]</pre>
 </div>
-<div created="20210309063123890" creator="dlcc" modified="20210309063246597" modifier="dlcc" title="R-plot">
-<pre>* `plot()`
+<div created="20210309063123890" creator="dlcc" modified="20210309074522218" modifier="dlcc" title="R-plot">
+<pre>see Ecnomoetrics TA2 for demo
+
+* `plot()`
 * `abline(a,b)`
 ** 在已有 plot 加直線
 ** a+bx
 * graphical parameters
 ** `col` color
 *** &quot;red&quot;
-*** &quot;#ffffff&quot;</pre>
+*** &quot;#ffffff&quot;
+* `text()`
+** 在已有 plot 加 text
+** `text(1.5,5,&quot;with Malta&quot;, col=&quot;#00dd00&quot;)` means &quot;with Malta&quot; in color #00dd00 in position (1.5, 5)</pre>
+</div>
+<div created="20210309072213100" creator="dlcc" modified="20210309074535275" modifier="dlcc" tags="" title="R-regression" type="text/x-markdown">
+<pre>see Ecnomoetrics TA2 for demo
+- `lm(formula, date)`
+	- e.g. `lm(formula = growth~tradeshare, data=Growth)` means the linear regression of `Growth$growth` vs. `Growth$tradeshare`</pre>
 </div>
 <div created="20210302153451526" modified="20210302153530005" title="R-輔助性">
 <pre>* 尋找所有變數名稱 
@@ -12719,7 +12731,7 @@ for details go to control panel → info → advanced → loaded modules
 ** use token instead of password or it won't work
 </pre>
 </div>
-<div created="20210303023757571" modified="20210305054233486" tags="$:/tags/Stylesheet" title="titi/css/roam">
+<div created="20210303023757571" creator="dlcc" modified="20210309073001311" modifier="dlcc" tags="$:/tags/Stylesheet" title="titi/css/roam">
 <pre>```
 :root {
     /*1:left, 2:main, 3:right*/
@@ -12852,6 +12864,13 @@ pre{
 }
 .tc-tiddler-frame .tc-binary-warning{
     background: #919191db;
+}
+
+.cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters{
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.83);
+    font-family: 'Myuppy', sans-serif !important;
+    caret-color: var(--text-color) !important;
 }
 
 ```</pre>
