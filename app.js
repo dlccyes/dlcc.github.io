@@ -6,8 +6,7 @@
 // $(document).ready(function(){
 var client_id = '01f12efd21c64c08838af6608650bac1';
 var client_secret = 'aec0eb3ae63f40eab5b7834a2cb4703b';
-// var redirect_uri = 'https://localhost/spotifyapi';
-var redirect_uri = 'https://dlccyes.github.io/';
+var redirect_uri = 'https://localhost/spotifyapi';
 var scopes = 'user-read-private user-read-email';
 
 function login(){
