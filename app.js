@@ -1,15 +1,3 @@
-
-// alert('fi0');
-    // window.location.href('https://www.google.com');
-
-// location.href = '/pp';
-// $(document).ready(function(){
-var client_id = '01f12efd21c64c08838af6608650bac1';
-var client_secret = 'aec0eb3ae63f40eab5b7834a2cb4703b';
-// var redirect_uri = 'https://localhost/spotifyapi';
-var redirect_uri = 'https://dlccyes.github.io/';
-var scopes = 'user-read-private user-read-email';
-
 function login(){
     var url='https://accounts.spotify.com/authorize'
     url += "?client_id=" + client_id;
@@ -38,7 +26,12 @@ function get_token(){
         async: false,
         success: function(result){
             tolkien = result['access_token'];
-        }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error ' + textStatus);
+            console.log(jqXHR);
+        },
+        timeout: 5000
     });
     return tolkien; 
 }
@@ -63,15 +56,35 @@ function spott_get(url, token, callback, async=true){
         error: function(jqXHR, textStatus, errorThrown) {
             console.log('error ' + textStatus);
             console.log(jqXHR);
-            if (errcallback != undefined)
-                errcallback(jqXHR);
         },
+        timeout: 5000
     });
 }
 function spott_get_sync(url, token, callback){ //sync version
     spott_get(url, token, callback, async=false);
 }
 
+function get_all_playlists(){
+    var continuue = true;
+    // if(playlists.length != 0){ //alreadt executed
+    //     continuue = false;
+    // }
+    var next_url = 'https://api.spotify.com/v1/me/playlists?limit=50';
+    while(continuue){
+        spott_get_sync(next_url, token, function(xhr){
+            // console.log(xhr['items']);
+            playlists = playlists.concat(xhr['items']);
+            // for(var i in xhr['items']){
+            //     playlists.push(xhr['items'][i]);
+            // }
+            if(xhr['next']){
+                next_url = xhr['next'];
+            }else{
+                continuue = false;
+            }
+        });
+    }
+}
 // function current_playback(token){
 //     // var result = null
 //     $.ajax({

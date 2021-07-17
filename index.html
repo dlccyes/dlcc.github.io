@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="config.js"></script>
     <script src="app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -11,7 +13,7 @@
 <button id='login'>login to spotify</button>
 <button id='current_playback'>show current playback</button>
 <br>
-<button id='show_all_playlists'>show all playlists</button>
+<!-- <button id='show_all_playlists'>show all playlists</button> -->
 <br>
 <input type="text" id="playlist_input">search playlist</input>
 <button id='get_playlist'>print playlist detail</button>
@@ -21,6 +23,8 @@
 
 
 <script>
+var redirect_uri = 'https://localhost/spotifyapi/';
+var scopes = 'user-read-private user-read-email';
 
 var url = String(window.location);
 if(url.search(/=/)!=-1){
@@ -41,6 +45,13 @@ $(document).ready(function(){
         // console.log('yeah',token);
     });
 
+    $('#show_all_playlists').click(function(){
+        if(playlists.length == 0){ //alreadt executed
+            get_all_playlists();
+        }
+        // console.log(playlists);
+    });
+
     // $('#current_playback').unbind('click');
     // $('#current_playback').on('click',function(){
     //     // token += 1;
@@ -59,6 +70,7 @@ $(document).ready(function(){
     });
 
     $('#get_playlist').click(function(){ //get full playlist details including all tacks
+        get_all_playlists();
         name = $('#playlist_input').val();
         var playlist_id = '';
         var playlist_name = '';
@@ -133,28 +145,7 @@ $(document).ready(function(){
         // // `329i010xBb8kqife9WYVu7`
     });
     
-    $('#show_all_playlists').click(function(){ //get all playlists of this user
-        var continuue = true;
-        if(playlists.length != 0){ //alreadt executed
-            continuue = false;
-        }
-        var next_url = 'https://api.spotify.com/v1/me/playlists?limit=50';
-        while(continuue){
-            spott_get_sync(next_url, token, function(xhr){
-                // console.log(xhr['items']);
-                playlists = playlists.concat(xhr['items']);
-                // for(var i in xhr['items']){
-                //     playlists.push(xhr['items'][i]);
-                // }
-                if(xhr['next']){
-                    next_url = xhr['next'];
-                }else{
-                    continuue = false;
-                }
-            });
-        }
-        console.log(playlists);
-    });
+
 
 });
 
